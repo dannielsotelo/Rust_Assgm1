@@ -1,4 +1,4 @@
-// Copyright © 2019 Bart Massey
+// Copyright © 2019 Danniel Sotelo
 // [This program is licensed under the "MIT License"]
 // Please see the file LICENSE in the source
 // distribution of this software for license terms.
@@ -23,8 +23,19 @@ pub type StatFn = fn(&[f64]) -> Option<f64>;
 /// # use stats::*;
 /// assert_eq!(Some(0.0), mean(&[-1.0, 1.0]));
 /// ```
+///Referenced this two sites to help me create this function
+///https://stackoverflow.com/questions/45309240/how-do-i-perform-operations-on-different-numeric-types-while-computing-the-avera
+///https://benjaminbrandt.com/averages-in-rust/
 pub fn mean(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no mean yet")
+    let mut avg = 0f64;
+    if nums.len() < 1 {
+        Some(avg)
+    }else{
+        let sum: f64 = Iterator::sum(nums.iter());
+        let length = nums.len() as f64;
+        avg = sum / length; 
+        Some(avg)
+    }
 }
 
 /// Population standard deviation of input values. The
