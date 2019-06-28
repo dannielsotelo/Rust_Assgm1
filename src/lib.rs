@@ -69,13 +69,39 @@ pub fn stddev(nums: &[f64]) -> Option<f64> {
 /// # use stats::*;
 /// assert_eq!(Some(0.0), median(&[0.0, 0.5, -1.0, 1.0]));
 /// ```
+///Logic for median: If nums list is odd, median is the center of a sorted Nums list. 
+///If nums list is even, add the two middle terms and divide by 2.
+///Referenced:
+///https://benjaminbrandt.com/averages-in-rust/
 pub fn median(nums: &[f64]) -> Option<f64> {
     // Make a sorted copy of the input floats.
     let mut nums = nums.to_owned();
     // https://users.rust-lang.org/t/how-to-sort-a-vec-of-floats/2838/2
     nums.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
-    unimplemented!("no median yet")
+    if nums.len() < 1 {
+        None
+    }else {
+        let middle = (nums.len() / 2) as f64;
+        if nums.len() % 2 == 0 {
+            Some(nums[(middle-1f64)as usize])
+        //mean(&nums[(middle-1f64)as usize..(middle+1f64) as usize])
+        } else {
+        Some(middle)
+        }
+    }
+
+ 
+
+   /* let numsLength = nums.len();
+    let mut mediam = numsLength / 2;
+
+    if numsLength % 2 == 0{
+        mean(*nums[(median-1f64)..(median+1f64)])
+    } else {
+        Some(nums[median]f64)
+    }*/
+    //unimplemented!("no median yet")
 }
 
 /// L2 norm (Euclidean norm) of input values. The L2
