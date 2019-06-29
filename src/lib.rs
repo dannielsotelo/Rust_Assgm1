@@ -28,7 +28,7 @@ pub type StatFn = fn(&[f64]) -> Option<f64>;
 ///https://benjaminbrandt.com/averages-in-rust/
 pub fn mean(nums: &[f64]) -> Option<f64> {
     let mut avg = 0f64;
-    if nums.len() < 1 {
+    if nums.is_empty(){
         Some(avg)
     } else {
         //iterates through nums vecotr and sums up all the elements
@@ -54,7 +54,7 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// ```
 ///http://xion.io/post/code/rust-for-loop.html
 pub fn stddev(nums: &[f64]) -> Option<f64> {
-    if nums.len() < 2 {
+    if nums.is_empty() {
         None
     } else {
         let average = mean(&nums);
@@ -91,7 +91,7 @@ pub fn median(nums: &[f64]) -> Option<f64> {
     // https://users.rust-lang.org/t/how-to-sort-a-vec-of-floats/2838/2
     nums.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
-    if nums.len() < 1 {
+    if nums.is_empty() {
         None
     } else {
         let middle = (nums.len() / 2) as f64;
@@ -119,7 +119,7 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 ///https://www.dcode.fr/vector-norm
 ///used Iterator:: from mean() above
 pub fn l2(nums: &[f64]) -> Option<f64> {
-    if nums.len() == 0 {
+    if nums.is_empty() {
         Some(0.0f64)
     } else {
         let mut nums_sqr = Vec::new();
