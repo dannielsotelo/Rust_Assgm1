@@ -23,6 +23,10 @@ pub type StatFn = fn(&[f64]) -> Option<f64>;
 /// # use stats::*;
 /// assert_eq!(Some(0.0), mean(&[-1.0, 1.0]));
 /// ```
+/// ```
+/// # use stats::*;
+/// assert_eq!(Some(2.0), mean(&[1.0, 2.0, 3.0]));
+/// ```
 ///Referenced this two sites to help me create this function
 ///https://stackoverflow.com/questions/45309240/how-do-i-perform-operations-on-different-numeric-types-while-computing-the-avera
 ///https://benjaminbrandt.com/averages-in-rust/
@@ -51,6 +55,10 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// ```
 /// # use stats::*;
 /// assert_eq!(Some(0.0), stddev(&[1.0, 1.0]));
+/// ```
+/// ```
+/// # use stats::*;
+/// assert_eq!(Some(0.0), stddev(&[2.0, 2.0, 2.0]));
 /// ```
 ///http://xion.io/post/code/rust-for-loop.html
 pub fn stddev(nums: &[f64]) -> Option<f64> {
@@ -81,6 +89,10 @@ pub fn stddev(nums: &[f64]) -> Option<f64> {
 /// # use stats::*;
 /// assert_eq!(Some(0.0), median(&[0.0, 0.5, -1.0, 1.0]));
 /// ```
+/// ```
+/// # use stats::*;
+/// assert_eq!(Some(3.0), median(&[1.0, 2.0, 5.0, 4.0, 3.0]));
+/// ```
 ///Logic for median: If nums list is odd, median is the center of a sorted Nums list.
 ///If nums list is even, add the two middle terms and divide by 2.
 ///Referenced:
@@ -95,10 +107,11 @@ pub fn median(nums: &[f64]) -> Option<f64> {
         None
     } else {
         let middle = (nums.len() / 2) as f64;
+        println!("middle = {}", middle);
         if nums.len() % 2 == 0 {
             Some(nums[(middle - 1f64) as usize])
         } else {
-            Some(middle)
+            Some(nums[middle as usize])
         }
     }
 }
@@ -116,6 +129,11 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 /// # use stats::*;
 /// assert_eq!(Some(5.0), l2(&[-3.0, 4.0]));
 /// ```
+/// ```
+/// # use stats::*;
+/// assert_eq!(Some(5.0), l2(&[3.0, -4.0]));
+/// ```
+///
 ///https://www.dcode.fr/vector-norm
 ///used Iterator:: from mean() above
 pub fn l2(nums: &[f64]) -> Option<f64> {
