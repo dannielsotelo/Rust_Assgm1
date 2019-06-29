@@ -31,6 +31,7 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
     if nums.len() < 1 {
         Some(avg)
     }else{
+        //iterates through nums vecotr and sums up all the elements
         let sum: f64 = Iterator::sum(nums.iter());
         let length = nums.len() as f64;
         avg = sum / length;
@@ -51,19 +52,18 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// # use stats::*;
 /// assert_eq!(Some(0.0), stddev(&[1.0, 1.0]));
 /// ```
-///Copied code from median provided by Bart Massey
 ///http://xion.io/post/code/rust-for-loop.html
 pub fn stddev(nums: &[f64]) -> Option<f64> {
     if nums.len() < 2 {
         None
     } else {
         let average = mean(&nums);
-        let mut vector2 = Vec::new();
+        let mut variance = Vec::new();
         for i in nums {
             let i = (i - average.unwrap()).powf(2f64);
-            vector2.push(i);
+            variance.push(i);
         }
-        mean(&vector2)
+        mean(&variance)
     }
 }
 
@@ -116,6 +116,18 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 /// # use stats::*;
 /// assert_eq!(Some(5.0), l2(&[-3.0, 4.0]));
 /// ```
+///https://www.dcode.fr/vector-norm
+///used Iterator:: from mean() above
 pub fn l2(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no l2 yet")
+    if nums.len() == 0 {
+        Some(0.0f64)
+    } else {
+        let mut nums_sqr = Vec::new();
+        for i in nums {
+            let i = i.powf(2f64);
+            nums_sqr.push(i);
+        }
+        let sum: f64 = Iterator::sum(nums_sqr.iter());
+        Some(sum.sqrt())
+    }
 }
