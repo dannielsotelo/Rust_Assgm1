@@ -54,21 +54,16 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 ///Copied code from median provided by Bart Massey
 ///http://xion.io/post/code/rust-for-loop.html
 pub fn stddev(nums: &[f64]) -> Option<f64> {
-    //let list = nums.clone();
     if nums.len() < 2 {
         None
     } else {
         let average = mean(&nums);
-        println!("average = {:?}", average);
         let mut vector2 = Vec::new();
         for i in nums {
             let i = (i - average.unwrap()).powf(2f64);
-            println!("i = {}", i);
             vector2.push(i);
         }
-        let new_average = mean(&vector2);
-        println!("average = {:?}", new_average);
-        new_average
+        mean(&vector2)
     }
 }
 
