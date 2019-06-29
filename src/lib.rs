@@ -51,8 +51,19 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// # use stats::*;
 /// assert_eq!(Some(0.0), stddev(&[1.0, 1.0]));
 /// ```
+///Copied code from median provided by Bart Massey
+///http://xion.io/post/code/rust-for-loop.html
 pub fn stddev(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no stddev yet")
+    if nums.len() < 1 {
+        None
+    } else {
+        let average = mean(nums);
+        for i in nums {
+            let i = (i - average.unwrap()).sqrt();
+        }
+        Some(mean(nums).unwrap()
+                .sqrt())
+    }
 }
 
 /// Median value of input values, taking the value closer
