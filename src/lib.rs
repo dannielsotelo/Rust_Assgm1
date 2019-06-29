@@ -30,7 +30,7 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
     let mut avg = 0f64;
     if nums.len() < 1 {
         Some(avg)
-    }else{
+    } else {
         //iterates through nums vecotr and sums up all the elements
         let sum: f64 = Iterator::sum(nums.iter());
         let length = nums.len() as f64;
@@ -81,7 +81,7 @@ pub fn stddev(nums: &[f64]) -> Option<f64> {
 /// # use stats::*;
 /// assert_eq!(Some(0.0), median(&[0.0, 0.5, -1.0, 1.0]));
 /// ```
-///Logic for median: If nums list is odd, median is the center of a sorted Nums list. 
+///Logic for median: If nums list is odd, median is the center of a sorted Nums list.
 ///If nums list is even, add the two middle terms and divide by 2.
 ///Referenced:
 ///https://benjaminbrandt.com/averages-in-rust/
@@ -93,12 +93,12 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 
     if nums.len() < 1 {
         None
-    }else {
+    } else {
         let middle = (nums.len() / 2) as f64;
         if nums.len() % 2 == 0 {
-            Some(nums[(middle-1f64)as usize])
+            Some(nums[(middle - 1f64) as usize])
         } else {
-        Some(middle)
+            Some(middle)
         }
     }
 }
