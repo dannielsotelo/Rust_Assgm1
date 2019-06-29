@@ -33,7 +33,7 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
     }else{
         let sum: f64 = Iterator::sum(nums.iter());
         let length = nums.len() as f64;
-        avg = sum / length; 
+        avg = sum / length;
         Some(avg)
     }
 }
@@ -54,15 +54,21 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 ///Copied code from median provided by Bart Massey
 ///http://xion.io/post/code/rust-for-loop.html
 pub fn stddev(nums: &[f64]) -> Option<f64> {
-    if nums.len() < 1 {
+    //let list = nums.clone();
+    if nums.len() < 2 {
         None
     } else {
-        let average = mean(nums);
+        let average = mean(&nums);
+        println!("average = {:?}", average);
+        let mut vector2 = Vec::new();
         for i in nums {
-            let i = (i - average.unwrap()).sqrt();
+            let i = (i - average.unwrap()).powf(2f64);
+            println!("i = {}", i);
+            vector2.push(i);
         }
-        Some(mean(nums).unwrap()
-                .sqrt())
+        let new_average = mean(&vector2);
+        println!("average = {:?}", new_average);
+        new_average
     }
 }
 
